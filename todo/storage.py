@@ -2,28 +2,7 @@ from pathlib import Path
 import json
 
 def load_data(path = "todo.json") :
-        path = Path(path)
-        if path.exists():
-            print("jsonファイルがあります")
-            # ここでjsonファイルの読み込み処理
-        else :
-            init_data =  {"next_id" : 1, "todos" : []}
-            return init_data
-
-#以下コードはファイルがない場合の動作確認用テスト関数 
-# def test_load_data(path = "test.json") :
-#         path = Path(path)
-#         if path.exists():
-#             print("jsonファイルがあります")
-#             # ここでjsonファイルの読み込み処理
-#         else :
-#             init_data =  {"next_id" : 1, "todos" : []}
-#             return print(init_data)
-
-
-    
-    
-        """
+    """_summary_
         1. ファイルが存在するか確認
             - 無ければ初期データを返す
 
@@ -35,13 +14,29 @@ def load_data(path = "todo.json") :
             - next_id, todos があることを最低限確認
 
         4. dict を返す
-        """ 
+    """
+    path = Path(path)
+    if path.exists():
+        return "jsonファイルがあります"
+    else :
+        init_data =  {"next_id" : 1, "todos" : []}
+        return init_data
+
+
+
+
     
+    
+       
     
 
 def save_data(data: dict, path = "todo.json") :
     pass
 
 data = load_data()
-# data = test_load_data()
 
+
+
+        
+
+    
