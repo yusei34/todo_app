@@ -16,16 +16,20 @@ def load_data(path = "todo.json") :
         4. dict を返す
     """
     path = Path(path)
-    if path.exists():
-        return "jsonファイルがあります"
-    else :
-        init_data =  {"next_id" : 1, "todos" : []}
-        return init_data
-
-
-
-
     
+    if not path.exists():
+        return {"next_id": 1, "todos": []}
+
+    with open(path, "r", encoding="utf-8") as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError as e:
+            raise e
+    return data
+
+
+
+
     
        
     
@@ -34,7 +38,7 @@ def save_data(data: dict, path = "todo.json") :
     pass
 
 data = load_data()
-
+print(data)
 
 
         
