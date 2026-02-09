@@ -17,7 +17,7 @@ def load_data(path = "todo.json") :
     """
     path = Path(path)
     if path.exists():
-        with open(path,'r') as f:
+        with open(path,'r', encoding='utf-8') as f:
             json_obj = json.load(f)
         return json_obj 
     else :
