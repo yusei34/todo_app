@@ -16,14 +16,16 @@ def load_data(path = "todo.json") :
         4. dict を返す
     """
     path = Path(path)
-    if path.exists():
-        with open(path,'r', encoding='utf-8') as f:
-            json_obj = json.load(f)
-        return json_obj 
-    else :
-        init_data =  {"next_id" : 1, "todos" : []}
-        return init_data
+    
+    if not path.exists():
+        return {"next_id": 1, "todos": []}
 
+    with open(path, "r", encoding="utf-8") as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError as e:
+            raise e
+    return data
 
 
 
