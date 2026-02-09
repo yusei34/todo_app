@@ -17,7 +17,9 @@ def load_data(path = "todo.json") :
     """
     path = Path(path)
     if path.exists():
-        return "jsonファイルがあります"
+        with open(path,'r') as f:
+            json_obj = json.load(f)
+        return json_obj 
     else :
         init_data =  {"next_id" : 1, "todos" : []}
         return init_data
@@ -25,7 +27,7 @@ def load_data(path = "todo.json") :
 
 
 
-    
+
     
        
     
@@ -34,7 +36,7 @@ def save_data(data: dict, path = "todo.json") :
     pass
 
 data = load_data()
-
+print(data)
 
 
         
