@@ -19,6 +19,9 @@ def load_data(path = "todo.json") :
     
     if not path.exists():
         return {"next_id": 1, "todos": []}
+    
+    if path.stat().st_size == 0:
+        return {"next_id": 1, "todos": []}
 
     with open(path, "r", encoding="utf-8") as f:
         try:
@@ -28,17 +31,15 @@ def load_data(path = "todo.json") :
     return data
 
 
-
-
-    
-       
-    
-
 def save_data(data: dict, path = "todo.json") :
-    pass
+    path = Path(path)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        
+    
 
 data = load_data()
-print(data)
+save_data(data)
 
 
         
