@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+from datetime import date
 
 def load_data(path = "todo.json") :
     """_summary_
@@ -26,6 +27,10 @@ def load_data(path = "todo.json") :
     with open(path, "r", encoding="utf-8") as f:
         try:
             data = json.load(f)
+            for todo in data["todos"]:
+                todo["created_at"] = date.fromisoformat(todo["created_at"])
+                if todo["due"] is not None:
+                    todo["due"] = date.fromisoformat(todo["due"])
         except json.JSONDecodeError as e:
             raise e
     return data
