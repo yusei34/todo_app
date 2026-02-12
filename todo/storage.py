@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 from datetime import date
 
+
 def load_data(path = "todo.json") :
     """_summary_
         1. ファイルが存在するか確認
@@ -38,6 +39,10 @@ def load_data(path = "todo.json") :
 
 def save_data(data: dict, path = "todo.json") :
     path = Path(path)
+    for todo in data["todos"]:
+            todo["created_at"] = str(todo["created_at"])
+            if todo["due"] is not None:
+                todo["due"] = str(todo["due"])
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         
