@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 from datetime import date
-
+from copy import deepcopy
 
 def load_data(path = "todo.json") :
     """_summary_
@@ -39,17 +39,22 @@ def load_data(path = "todo.json") :
 
 def save_data(data: dict, path = "todo.json") :
     path = Path(path)
-    for todo in data["todos"]:
-            todo["created_at"] = str(todo["created_at"])
+    
+    out = deepcopy(data)
+    
+    for todo in out["todos"]:
+            todo["created_at"] = todo["created_at"].isoformat()  # date -> "YYYY-MM-DD"
             if todo["due"] is not None:
-                todo["due"] = str(todo["due"])
+                todo["due"] = todo["due"].isoformat()
+                
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(out, f, ensure_ascii=False, indent=2)
         
     
 
-data = load_data()
-save_data(data)
+d = load_data()
+save_data(d)
+print(type(d["todos"][0]["created_at"]))
 
 
         
