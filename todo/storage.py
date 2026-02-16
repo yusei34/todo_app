@@ -19,14 +19,22 @@ def load_data(path = "todo.json") :
     """
     path = Path(path)
     
+    # Check there is "todo.json"
+    
+    # 1. if "todo.json" is nothing , return Initial data 
     if not path.exists():
         return {"next_id": 1, "todos": []}
     
+    # 2. There is "todo.json" but It is nothing data 
+    
+    # Check todo.json is 0byte
     if path.stat().st_size == 0:
         return {"next_id": 1, "todos": []}
 
+    # Open and Read todo.json
     with open(path, "r", encoding="utf-8") as f:
         try:
+            # retrieve data from todo.json  
             data = json.load(f)
         except json.JSONDecodeError as e:
             raise e
